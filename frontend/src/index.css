@@ -3,3 +3,20 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.post-list {
+  width: 100%;
+  min-height: 80%;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  padding: 50px;
+}
+
+.post-item {
+  margin: 10px auto;
+  width: 500px;
+  height: 50%;
+  background-color: white;
+  border: 1px solid black;
+  padding: 30px;
+}
