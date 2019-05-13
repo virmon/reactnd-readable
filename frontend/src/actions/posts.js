@@ -5,7 +5,7 @@ export const DELETE_POST = 'DELETE_POST'
 export const INCREMENT_VOTE = 'INCREMENT_VOTE'
 export const DECREMENT_VOTE = 'DECREMENT_VOTE'
 
-export function receivePost (posts) {
+export function receivePosts (posts) {
     return {
         type: RECEIVE_POSTS,
         posts

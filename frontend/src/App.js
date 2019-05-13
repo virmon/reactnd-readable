@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PostList from './components/PostList'
+import { receivePosts } from './actions/posts'
+import { connect } from 'react-redux'
 import "./App.css";
 
 class App extends Component {
@@ -32,26 +34,48 @@ class App extends Component {
 
   
   componentDidMount() {
-    const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001';
-    const url = `${api}/posts`;
-    console.log('fetching from url', url);
+    const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
+    const url = `${api}/posts`
+    console.log('fetching from url', url)
     fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
       .then( (res) => { return(res.json()) })
       .then((data) => {
-        this.setState({backend: data});
+        this.setState({backend: data})
+          this.props.receivePosts(data)
       });
-
   }
   
+  handleCategory = (cat) => {
+    const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
+    const url = `${api}/${cat}/posts`
+    fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
+      .then( (res) => { return(res.json()) })
+      .then((data) => {
+          this.props.receivePosts(data)
+      });
+  }
 
   render() {
-    console.log(this.state.backend)
+    const { posts } = this.props
+    console.log(posts)
     return (
       <div className="App">
-        <PostList data={this.state.backend} />
+        <PostList data={posts} />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps ({ posts }) {
+  return {
+    posts: !posts ? [] : posts
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    receivePosts: (posts) => dispatch(receivePosts(posts))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
