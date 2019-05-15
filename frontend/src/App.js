@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PostList from './components/PostList'
+import PostDetail from './components/PostDetail'
+import Nav from './components/Nav'
 import { receivePosts } from './actions/posts'
 import { connect } from 'react-redux'
 import "./App.css";
@@ -57,11 +60,18 @@ class App extends Component {
 
   render() {
     const { posts } = this.props
-    console.log(posts)
+    // console.log(posts)
     return (
-      <div className="App">
-        <PostList data={posts} />
-      </div>
+      <Router>
+        <Nav />
+        <Switch>
+          <Route exact path='/' render={() => 
+            <PostList data={posts} />
+          }/>
+          <Route path='/new' component={PostList} />
+          <Route path='/:id' component={PostDetail} />
+        </Switch>
+      </Router>
     );
   }
 }

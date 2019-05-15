@@ -1,12 +1,9 @@
 import { RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/comments'
 
-export function comments (state = {}, action) {
+export function comments (state = [], action) {
     switch (action.type) {
         case RECEIVE_COMMENTS :
-            return {
-                ...state,
-                ...action.comments
-            }
+            return action.comments
         case ADD_COMMENT :
             return {
                 ...state,
