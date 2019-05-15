@@ -5,22 +5,14 @@ export function posts (state = [], action) {
         case RECEIVE_POSTS :
             return action.posts
         case ADD_POST :
-            return {
-                ...state,
-                ...action.post
-            }
+            return state.concat(action.post)
         case EDIT_POST :
-            return {
+            return [
                 ...state,
-                [state.action.id]: {
-                    ...action.post
-                }
-            }
+                state.filter((post) => post.id === action.id)
+            ]
         case DELETE_POST :
-            return {
-                ...state,
-                ...action.id
-            }
+            return state.filter((post) => post.id !== action.id)
         default :
             return state
     }
