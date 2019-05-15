@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PostList from './components/PostList'
 import PostDetail from './components/PostDetail'
+import NewPost from './components/NewPost'
 import Nav from './components/Nav'
 import { receivePosts } from './actions/posts'
 import { connect } from 'react-redux'
@@ -68,7 +69,7 @@ class App extends Component {
           <Route exact path='/' render={() => 
             <PostList data={posts} />
           }/>
-          <Route path='/new' component={PostList} />
+          <Route path='/new' component={NewPost} />
           <Route path='/:id' component={PostDetail} />
         </Switch>
       </Router>
