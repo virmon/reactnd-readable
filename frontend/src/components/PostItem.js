@@ -1,19 +1,19 @@
 import React from 'react'
+import { formatDate } from '../utils/helpers'
+import PostButton from './PostButton';
 
 const PostItem = ({ title, body, author, category, timestamp, voteScore, commentCount }) => {
     return(
-        <div className='post-item'>
-            <div>
+        <div className='card'>
+            <div className='post-header'>
                 <h3>{title}</h3>
-                <h4>{category}</h4>
+                <span>{author} {formatDate(timestamp)}</span>
             </div>
-            <p>{body}</p>
-            <span>{author}</span>
-            <h5>{timestamp}</h5>
-            <div>
-                <h5>{voteScore} Vote Score</h5>
-                <h5>{commentCount} Comments</h5>
+            <div className='post-content'>
+                <p>{body}</p>
+                <p>{category}</p>
             </div>
+            <PostButton voteScore={voteScore} commentCount={commentCount} />
         </div>
     )
 }
