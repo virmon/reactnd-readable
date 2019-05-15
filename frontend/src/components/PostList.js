@@ -10,9 +10,9 @@ class PostList extends Component {
             <div className='post-list'>
                 {
                     data.map((item) => 
-                        <Link to={`/${item.id}`}>
+                        <Link key={item.id} to={`/${item.id}`}>
                             <PostItem 
-                                key={item.id}
+                                id={item.id}
                                 title={item.title} 
                                 body={item.body} 
                                 author={item.author} 
