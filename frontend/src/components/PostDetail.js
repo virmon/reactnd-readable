@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom'
 import CommentList from './CommentList'
 import PostButton from './PostButton'
 import { deletePost } from '../actions/posts'
-import { receiveComments, addComment } from '../actions/comments'
-import { _deletePost, _addComment } from '../utils/api'
-import { formatDate, formatComment } from '../utils/helpers'
+import { receiveComments } from '../actions/comments'
+import { _deletePost } from '../utils/api'
+import { formatDate } from '../utils/helpers'
 import { connect } from 'react-redux'
 
 const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
@@ -32,22 +32,8 @@ class PostDetail extends Component {
             [e.target.name]: e.target.value
         })
     }
-    comment = (e) => {
-        e.preventDefault()
-        const { author, content } = this.state
-        const url = `${api}/comments`
-        const comment = {
-            body: content,
-            author,
-            parentId: this.props.id
-        }
-        console.log(formatComment(comment))
-        _addComment(url, formatComment(comment))
-            .then(data => this.props.addComment(data))
-            .catch(error => console.error(error))
-    }
     handleEdit = (id) => {
-        const url = `${api}/posts/${id}`
+        // const url = `${api}/posts/${id}`
 
         this.setState({ toUpdate: true })
 
@@ -110,8 +96,7 @@ function mapStateToProps ({ posts, comments }, {match}) {
 function mapDispatchToProps (dispatch) {
     return {
         receiveComments: (comments) => dispatch(receiveComments(comments)),
-        deletePost: (id) => dispatch(deletePost(id)),
-        addComment: (comment) => dispatch(addComment(comment))
+        deletePost: (id) => dispatch(deletePost(id))
     }
 }
 

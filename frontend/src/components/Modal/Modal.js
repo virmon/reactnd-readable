@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { formatComment } from '../../utils/helpers'
 import { _addComment } from '../../utils/api'
 import { addComment } from '../../actions/comments'
+import { increment } from '../../actions/posts'
 import { connect } from 'react-redux'
 import './modal.css'
 
@@ -37,8 +38,10 @@ class Modal extends Component {
         }
         console.log(formatComment(comment))
         _addComment(url, formatComment(comment))
-            .then(data => this.props.addComment(data))
-            .catch(error => console.error(error))
+            .then(data => {
+                this.props.addComment(data)
+                this.props.increment(data.parentId)
+            })
         this.setState({ isOpen: false })
     }
     render () {
@@ -72,7 +75,8 @@ function mapStateToProps ({ posts, comments }, {parentId}) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        addComment: (comment) => dispatch(addComment(comment))
+        addComment: (comment) => dispatch(addComment(comment)),
+        increment: (id) => dispatch(increment(id))
     }
 }
 

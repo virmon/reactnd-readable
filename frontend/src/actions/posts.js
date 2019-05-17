@@ -2,8 +2,10 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
-export const INCREMENT_VOTE = 'INCREMENT_VOTE'
-export const DECREMENT_VOTE = 'DECREMENT_VOTE'
+export const UP_VOTE = 'UP_VOTE'
+export const DOWN_VOTE = 'DOWN_VOTE'
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
 
 export function receivePosts (posts) {
     return {
@@ -33,16 +35,30 @@ export function deletePost (id) {
     }
 }
 
-export function incrementVote (vote) {
+export function upVote (id) {
     return {
-        type: INCREMENT_VOTE,
-        vote
+        type: UP_VOTE,
+        id
     }
 }
 
-export function decrementVote (vote) {
+export function downVote (id) {
     return {
-        type: DECREMENT_VOTE,
-        vote
+        type: DOWN_VOTE,
+        id
+    }
+}
+
+export function increment (id) {
+    return {
+        type: INCREMENT,
+        id
+    }
+}
+
+export function decrement (id) {
+    return {
+        type: DECREMENT,
+        id
     }
 }

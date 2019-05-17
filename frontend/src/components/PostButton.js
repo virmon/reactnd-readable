@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Popover, Button } from 'antd'
 import Modal from './Modal/Modal'
-import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
+import { TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
 import { FaEllipsisH } from 'react-icons/fa'
 
 const PostButton = ({ voteScore, commentCount, parentId }) => {
