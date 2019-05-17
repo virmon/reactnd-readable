@@ -1,5 +1,7 @@
 import React from 'react'
+// import { Popover, Button } from 'antd'
 import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
+import { FaEllipsisH } from 'react-icons/fa'
 
 const PostButton = ({ voteScore, commentCount }) => {
     return (
@@ -10,12 +12,14 @@ const PostButton = ({ voteScore, commentCount }) => {
                 <li><TiThumbsDown className='post-icon'/></li>
             </ul>
             {
-                commentCount !== undefined
-                    ?   <ul className='comment-button'>
-                            <li>{commentCount}</li>
-                            <li><TiMessage className='post-icon'/></li>
-                        </ul>
-                    :   null
+                <ul className='comment-button'>
+                    {
+                        commentCount !== undefined
+                        ? <li style={{display: 'flex'}}>{commentCount === 1 ? commentCount + ' comment' : commentCount + ' comments'}</li>
+                        : null
+                    }
+                    <li><FaEllipsisH className='post-icon'/></li>
+                </ul>
             }
         </div>
     )

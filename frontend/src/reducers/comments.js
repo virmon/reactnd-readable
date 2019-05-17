@@ -5,22 +5,11 @@ export function comments (state = [], action) {
         case RECEIVE_COMMENTS :
             return action.comments
         case ADD_COMMENT :
-            return {
-                ...state,
-                ...action.comment
-            }
+            return state.concat(action.comment)
         case EDIT_COMMENT :
-            return {
-                ...state,
-                [state.action.id]: {
-                    ...action.comment
-                }
-            }
+            return state.filter((comment) => comment.id === action.id)
         case DELETE_COMMENT :
-            return {
-                ...state,
-                ...action.id
-            }
+            return state.filter((comment) => comment.id === action.id)
         default :
             return state
     }
