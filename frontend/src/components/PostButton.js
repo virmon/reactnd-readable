@@ -1,9 +1,10 @@
 import React from 'react'
 // import { Popover, Button } from 'antd'
+import Modal from './Modal/Modal'
 import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
 import { FaEllipsisH } from 'react-icons/fa'
 
-const PostButton = ({ voteScore, commentCount }) => {
+const PostButton = ({ voteScore, commentCount, parentId }) => {
     return (
         <div className='post-buttons'>
             <ul className='vote-button'>
@@ -15,7 +16,7 @@ const PostButton = ({ voteScore, commentCount }) => {
                 <ul className='comment-button'>
                     {
                         commentCount !== undefined
-                        ? <li style={{display: 'flex'}}>{commentCount === 1 ? commentCount + ' comment' : commentCount + ' comments'}</li>
+                        ? <li style={{display: 'flex'}}><Modal parentId={parentId}>{commentCount === 1 ? commentCount + ' comment' : commentCount + ' comments'}</Modal></li>
                         : null
                     }
                     <li><FaEllipsisH className='post-icon'/></li>

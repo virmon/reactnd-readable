@@ -140,7 +140,6 @@ body {
 }
 
 .new-comment {
-  border-top: 1px solid gray;
 }
 
 .new-comment input[type=text] {
@@ -148,7 +147,7 @@ body {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: 0;
+  border: 1px solid gray;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;

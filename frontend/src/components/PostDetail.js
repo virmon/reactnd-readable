@@ -81,13 +81,8 @@ class PostDetail extends Component {
                         <p style={{color:'blue'}} onClick={() => this.handleEdit(id)}>EDIT</p>
                         <p style={{color:'red'}} onClick={() => this.handleDelete(id)}>DELETE</p>
                     </div>
-                    <PostButton voteScore={voteScore} commentCount={commentCount}/>
+                    <PostButton voteScore={voteScore} commentCount={commentCount} parentId={id} />
                     <div className='comment-section'>
-                        <form onSubmit={this.comment} className='new-comment'>
-                            <input type='text' name='author' value={this.state.author} onChange={this.handleChange} placeholder='author' />
-                            <input type='text' name='content' value={this.state.content} onChange={this.handleChange} placeholder='comment' />
-                            <input type='submit' value='Comment' className='btn'/>
-                        </form>
                         <CommentList comments={comments} />
                     </div>
                 </div>
