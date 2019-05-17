@@ -4,14 +4,26 @@ body {
   font-family: sans-serif;
 }
 
+.app {
+  display: flex;
+  margin: 50px;
+}
+
+/* .app-content {
+  margin: 10px 200px 20px 20px;
+  padding: 50px 0 20px 0;
+} */
+
 .nav {
-  margin: 20px 200px 10px 200px;
-  width: 100%;
+  /* margin: 20px 200px 10px 200px; */
+  margin: 50px 0px 20px 200px;
+  width: 40%;
   height: 30%;
+  /* border: 1px solid black; */
 }
 
 .nav ul {
-  display: flex;
+  /* display: flex; */
   list-style: none;
   margin: 20px;
   padding: 0;
@@ -30,14 +42,15 @@ body {
 }
 
 .post-list {
-  width: 100%;
-  min-height: 80%;
+  margin: 10px 200px 20px 20px;
+  width: 50%;
+  height: 100%;
   padding: 50px 0 20px 0;
+  /* border: 1px solid black; */
 }
 
 .card {
   margin: 20px auto;
-  width: 500px;
   height: 50%;
   background-color: white;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(158,158,158,1);
@@ -54,7 +67,9 @@ body {
 }
 
 .post-item {
-  /* padding: 20px; */
+  margin: 100px 200px 20px 20px;
+  width: 50%;
+  height: 100%;
 }
 
 .post-list a {
@@ -69,7 +84,7 @@ body {
 
 .post-buttons .vote-button {
   margin-right: auto;
-  padding: 0 20px 0 20px;
+  padding: 0 10px 0 10px;
 }
 
 .post-buttons .comment-button {
@@ -101,12 +116,56 @@ body {
 }
 
 .comment-item {
-  /* padding: 10px 40px 0 40px; */
+  padding: 10px 40px 0 40px;
   margin: 0;
   border-top: 1px solid gray; 
 }
 
-input[type=text] {
-  width: 90%;
-  height: 20px;
+.new-post {
+  padding: 20px;
+  margin: 50px 200px 20px 20px;
+  width: 50%;
+  height: 100%;
+}
+
+.new-post input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.new-comment {
+  border-top: 1px solid gray;
+}
+
+.new-comment input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.new-post input[type=text]:focus {
+  border: 3px solid #42A5F5;
+}
+
+.btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  background-color: #42A5F5;
+}
+
+.btn:hover {
+  background-color: rgb(44, 142, 228);
 }

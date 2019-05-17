@@ -18,10 +18,11 @@ export function addPost (post) {
     }
 }
 
-export function editPost (post) {
+export function editPost (post, id) {
     return {
         type: EDIT_POST,
-        post
+        post, 
+        id
     }
 }
 

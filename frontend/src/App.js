@@ -5,6 +5,7 @@ import PostDetail from './components/PostDetail'
 import NewPost from './components/NewPost'
 import Nav from './components/Nav'
 import { receivePosts } from './actions/posts'
+import { _getPosts, _getCategoryById } from './utils/api'
 import { connect } from 'react-redux'
 import "./App.css";
 
@@ -41,45 +42,54 @@ class App extends Component {
     const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
     const url = `${api}/posts`
     console.log('fetching from url', url)
-    fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
-      .then( (res) => { return(res.json()) })
+    _getPosts(url)
       .then((data) => {
         this.setState({backend: data})
-          this.props.receivePosts(data)
+        this.props.receivePosts(data)
       });
   }
   
   handleCategory = (cat) => {
     const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
-    const url = `${api}/${cat}/posts`
-    fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
-      .then( (res) => { return(res.json()) })
+    let url
+    if (cat === 'all') {
+      url = `${api}/posts`
+    } else {
+      url = `${api}/${cat}/posts`
+    }
+    _getCategoryById(url)
       .then((data) => {
           this.props.receivePosts(data)
       });
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, categories } = this.props
     // console.log(posts)
     return (
       <Router>
-        <Nav />
-        <Switch>
-          <Route exact path='/' render={() => 
-            <PostList data={posts} />
-          }/>
-          <Route path='/new' component={NewPost} />
-          <Route path='/:id' component={PostDetail} />
-        </Switch>
+        <div className='app'>
+          <Nav categories={categories} handleCategory={this.handleCategory}/>
+          <Switch>
+            <Route exact path='/' render={() => 
+              <PostList data={posts} />
+            }/>
+            <Route path='/new' component={NewPost} />
+            <Route path='/:category/:id' component={PostDetail} />
+            <Route path='/:category' render={() => 
+              <PostList data={posts} />
+            }/>
+          </Switch>
+        </div>
       </Router>
     );
   }
 }
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ posts, categories }) {
   return {
-    posts: !posts ? [] : posts
+    posts: !posts ? [] : posts.sort((a,b) => b.timestamp - a.timestamp),
+    categories: !categories ? [] : categories
   }
 }
 

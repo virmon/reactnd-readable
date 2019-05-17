@@ -7,10 +7,7 @@ export function posts (state = [], action) {
         case ADD_POST :
             return state.concat(action.post)
         case EDIT_POST :
-            return [
-                ...state,
-                state.filter((post) => post.id === action.id)
-            ]
+            return state.filter((post) => post.id !== action.id).concat(action.post)
         case DELETE_POST :
             return state.filter((post) => post.id !== action.id)
         default :

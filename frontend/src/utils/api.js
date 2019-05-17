@@ -1,23 +1,34 @@
-export function getCategories (url) {
-    fetch(`${url}`, {
+export function _getCategories (url) {
+    return fetch(url, {
         headers: { 
+            'Content-Type': 'application/json',
             'Authorization': 'whatever-you-want' 
         }
     })
     .then((res) => res.json())
 }
 
-export function getCategoryById (id) {
-    fetch(`/${id}/posts`)
-        .then((res) => res.json())
+export function _getCategoryById (url, id) {
+    return fetch(url, {
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want'
+        }
+    })
+    .then((res) => res.json())
 }
 
-export function getPosts () {
-    fetch('/posts')
-        .then((res) => res.json())
+export function _getPosts (url) {
+    return fetch(url, {
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want'
+        }
+    })
+    .then((res) => res.json())
 }
 
-export function savePost (url, data) {
+export function _savePost (url, data) {
     return fetch(url, {
         method: 'POST',
         headers: { 
@@ -30,13 +41,18 @@ export function savePost (url, data) {
 }
 
 export function getPost (id) {
-    fetch(`/posts/${id}`)
+    return fetch(`/posts/${id}`)
         .then((res) => res.json())
 }
 
-export function editPost (id) {
-    fetch(`/posts/${id}`, {
-        method: 'PUT'
+export function _editPost (url, data) {
+    return fetch(url, {
+        method: 'PUT',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want'
+        },
+        body: JSON.stringify(data)
     })
         .then((res) => res.json())
 }
@@ -53,3 +69,14 @@ export function _deletePost (url, id) {
     .then((res) => res.json())
 }
 
+export function _addComment (url, comment) {
+    return fetch(url, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want'
+        },
+        body: JSON.stringify(comment)
+    })
+    .then((res) => res.json())
+}
