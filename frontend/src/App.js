@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backend: []
+      byDate: true
     };
   }
 
@@ -44,8 +44,10 @@ class App extends Component {
     console.log('fetching from url', url)
     _getPosts(url)
       .then((data) => {
-        this.setState({backend: data})
-        this.props.receivePosts(data)
+        this.setState({
+          byDate: true
+        })
+        this.props.receivePosts(data.sort((a,b) => b.timestamp - a.timestamp))
       });
   }
   
@@ -65,7 +67,6 @@ class App extends Component {
 
   render() {
     const { posts, categories } = this.props
-    // console.log(posts)
     return (
       <Router>
         <div className='app'>
@@ -88,7 +89,7 @@ class App extends Component {
 
 function mapStateToProps ({ posts, categories }) {
   return {
-    posts: !posts ? [] : posts.sort((a,b) => b.timestamp - a.timestamp),
+    posts: !posts ? [] : posts,
     categories: !categories ? [] : categories
   }
 }
