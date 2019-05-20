@@ -26,7 +26,7 @@ class PostButton extends Component {
         // this.props.downVote(this.props.parentId || this.props.id)
     }
     render () {
-        const { parentId } = this.props
+        const { id } = this.props
         return (
             <div className='post-buttons'>
                 <ul className='vote-button'>
@@ -35,7 +35,7 @@ class PostButton extends Component {
                 </ul>
                 {
                     <ul className='comment-button'>
-                        {parentId ? <li><Modal parentId={parentId}><TiMessage className='post-icon'/></Modal></li> : null}
+                        {id ? <li><Modal parentId={id}><TiMessage className='post-icon'/></Modal></li> : null}
                         <li><FaEllipsisH className='post-icon'/></li>
                     </ul>
                 }
