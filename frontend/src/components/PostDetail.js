@@ -66,8 +66,9 @@ class PostDetail extends Component {
                         <p>{category}</p>
                         <p style={{color:'blue'}} onClick={() => this.handleEdit(id)}>EDIT</p>
                         <p style={{color:'red'}} onClick={() => this.handleDelete(id)}>DELETE</p>
+                        <p>{voteScore} score  {commentCount} comments</p>
                     </div>
-                    <PostButton voteScore={voteScore} commentCount={commentCount} parentId={id} />
+                    <PostButton voteScore={voteScore} commentCount={commentCount} id={id} />
                     <div className='comment-section'>
                         <CommentList comments={comments} />
                     </div>

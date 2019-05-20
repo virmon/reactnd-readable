@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, ADD_POST, EDIT_POST, DELETE_POST, INCREMENT, DECREMENT } from '../actions/posts'
+import { RECEIVE_POSTS, ADD_POST, EDIT_POST, DELETE_POST, INCREMENT, DECREMENT, UP_VOTE, DOWN_VOTE } from '../actions/posts'
 
 export function posts (state = [], action) {
     switch (action.type) {
@@ -28,6 +28,24 @@ export function posts (state = [], action) {
             }
             return post
         })
+        case UP_VOTE :
+            return state.map((post) => {
+                if (post.id === action.id) {
+                    return Object.assign({}, post, {
+                        voteScore: post.voteScore + 1
+                    })
+                }
+                return post
+            })
+            case DOWN_VOTE :
+            return state.map((post) => {
+                if (post.id === action.id) {
+                    return Object.assign({}, post, {
+                        voteScore: post.voteScore - 1
+                    })
+                }
+                return post
+            })
         default :
             return state
     }

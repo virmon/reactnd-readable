@@ -1,29 +1,60 @@
-import React from 'react'
+import React, { Component } from 'react'
 // import { Popover, Button } from 'antd'
 import Modal from './Modal/Modal'
-import { TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
+import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
 import { FaEllipsisH } from 'react-icons/fa'
+import { upVote, downVote } from '../actions/posts'
+import { _votePost } from '../utils/api'
+import { connect } from 'react-redux'
 
-const PostButton = ({ voteScore, commentCount, parentId }) => {
-    return (
-        <div className='post-buttons'>
-            <ul className='vote-button'>
-                <li>{voteScore}</li>
-                <li><TiThumbsUp className='post-icon'/></li>
-                <li><TiThumbsDown className='post-icon'/></li>
-            </ul>
-            {
-                <ul className='comment-button'>
-                    {
-                        commentCount !== undefined
-                        ? <li style={{display: 'flex'}}><Modal parentId={parentId}>{commentCount === 1 ? commentCount + ' comment' : commentCount + ' comments'}</Modal></li>
-                        : null
-                    }
-                    <li><FaEllipsisH className='post-icon'/></li>
+const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
+const url = `${api}/posts/`
+
+class PostButton extends Component {
+    upVote = () => {
+        
+        console.log('fetching from url', url)
+        _votePost(url+this.props.id, {option: 'upVote'})
+            .then(data => this.props.upVote(data.id))
+            .catch(error => console.error(error))
+        // this.props.upVote(this.props.parentId || this.props.id)
+    }
+    downVote = () => {
+        _votePost(url+this.props.id, {option: 'downVote'})
+            .then(data => this.props.downVote(data.id))
+            .catch(error => console.error(error))
+        // this.props.downVote(this.props.parentId || this.props.id)
+    }
+    render () {
+        const { parentId } = this.props
+        return (
+            <div className='post-buttons'>
+                <ul className='vote-button'>
+                    <li><TiThumbsUp className='post-icon' onClick={this.upVote}/></li>
+                    <li><TiThumbsDown className='post-icon' onClick={this.downVote}/></li>
                 </ul>
-            }
-        </div>
-    )
+                {
+                    <ul className='comment-button'>
+                        {parentId ? <li><Modal parentId={parentId}><TiMessage className='post-icon'/></Modal></li> : null}
+                        <li><FaEllipsisH className='post-icon'/></li>
+                    </ul>
+                }
+            </div>
+        )
+    }
 }
 
-export default PostButton
+function mapStateToProps ({  }) {
+    return {
+
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        upVote: (id) => dispatch(upVote(id)),
+        downVote: (id) => dispatch(downVote(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostButton)
