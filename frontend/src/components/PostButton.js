@@ -4,26 +4,40 @@ import Modal from './Modal/Modal'
 import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
 import { FaEllipsisH } from 'react-icons/fa'
 import { upVote, downVote } from '../actions/posts'
-import { _votePost } from '../utils/api'
+import { upVoteComment, downVoteComment } from '../actions/comments'
+import { _votePost, _voteComment } from '../utils/api'
 import { connect } from 'react-redux'
 
 const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001'
-const url = `${api}/posts/`
 
 class PostButton extends Component {
     upVote = () => {
+        if (!this.props.commentId) {
+            const url = `${api}/posts/`
+            console.log('fetching from url', url)
+            _votePost(url+this.props.id, {option: 'upVote'})
+                .then(data => this.props.upVote(data.id))
+                .catch(error => console.error(error))
+        } else {
+            const url = `${api}/comments/`
+            _voteComment(url+this.props.commentId, {option: 'upVote'})
+                .then(data => this.props.upVoteComment(data.id))
+                .catch(error => console.error(error))
+        }
         
-        console.log('fetching from url', url)
-        _votePost(url+this.props.id, {option: 'upVote'})
-            .then(data => this.props.upVote(data.id))
-            .catch(error => console.error(error))
-        // this.props.upVote(this.props.parentId || this.props.id)
     }
     downVote = () => {
-        _votePost(url+this.props.id, {option: 'downVote'})
-            .then(data => this.props.downVote(data.id))
-            .catch(error => console.error(error))
-        // this.props.downVote(this.props.parentId || this.props.id)
+        if (!this.props.commentId) {
+            const url = `${api}/posts/`
+            _votePost(url+this.props.id, {option: 'downVote'})
+                .then(data => this.props.downVote(data.id))
+                .catch(error => console.error(error))
+        } else {
+            const url = `${api}/comments/`
+            _voteComment(url+this.props.commentId, {option: 'downVote'})
+                .then(data => this.props.downVoteComment(data.id))
+                .catch(error => console.error(error))
+        }
     }
     render () {
         const { id } = this.props
@@ -44,16 +58,18 @@ class PostButton extends Component {
     }
 }
 
-function mapStateToProps ({  }) {
+function mapStateToProps ({ posts }) {
     return {
-
+        posts
     }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
         upVote: (id) => dispatch(upVote(id)),
-        downVote: (id) => dispatch(downVote(id))
+        downVote: (id) => dispatch(downVote(id)),
+        upVoteComment: (id) => dispatch(upVoteComment(id)),
+        downVoteComment: (id) => dispatch(downVoteComment(id))
     }
 }
 

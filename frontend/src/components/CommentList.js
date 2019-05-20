@@ -11,6 +11,7 @@ class CommentList extends Component {
                         ? comments.map((comment) => 
                             <CommentItem 
                                 key={comment.id}
+                                id={comment.id}
                                 author={comment.author}
                                 body={comment.body}
                                 timestamp={comment.timestamp}

@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/comments'
+import { RECEIVE_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/comments'
 
 export function comments (state = [], action) {
     switch (action.type) {
@@ -10,6 +10,24 @@ export function comments (state = [], action) {
             return state.filter((comment) => comment.id === action.id)
         case DELETE_COMMENT :
             return state.filter((comment) => comment.id === action.id)
+        case UP_VOTE_COMMENT :
+            return state.map((comment) => {
+                if (comment.id === action.id) {
+                    return Object.assign({}, comment, {
+                        voteScore: comment.voteScore + 1
+                    })
+                }
+                return comment
+            })
+        case DOWN_VOTE_COMMENT :
+            return state.map((comment) => {
+                if (comment.id === action.id) {
+                    return Object.assign({}, comment, {
+                        voteScore: comment.voteScore - 1
+                    })
+                }
+                return comment
+            })
         default :
             return state
     }

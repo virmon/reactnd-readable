@@ -37,7 +37,7 @@ export function posts (state = [], action) {
                 }
                 return post
             })
-            case DOWN_VOTE :
+        case DOWN_VOTE :
             return state.map((post) => {
                 if (post.id === action.id) {
                     return Object.assign({}, post, {
