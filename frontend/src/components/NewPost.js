@@ -64,6 +64,7 @@ class NewPost extends Component {
         this.setState({ toHome: true })
     }
     render () {
+        const { categories } = this.props
         const { title, author, content, category, toHome } = this.state
         if (toHome) {
             return <Redirect to={'/'} />
@@ -75,7 +76,14 @@ class NewPost extends Component {
                     <input type='text' name='title' value={title} onChange={this.handleChange} placeholder='title' />
                     <input type='text' name='author' value={author} onChange={this.handleChange} placeholder='author' />
                     <input type='text' name='content' value={content} onChange={this.handleChange} placeholder='content' />
-                    <input type='text' name='category' value={category} onChange={this.handleChange} placeholder='category' />
+                    <select name='category' value={category} onChange={this.handleChange} >
+                        <option value=''>Select category</option>
+                        {
+                            categories.map((cat) =>
+                                <option key={cat.name} value={cat.name}>{cat.name}</option>
+                            )
+                        }
+                    </select>
                     <input type="submit" value="Save" className='btn'/>
                 </form>
             </div>
@@ -83,9 +91,9 @@ class NewPost extends Component {
     }
 }
 
-function mapStateToProps () {
+function mapStateToProps ({ categories }) {
     return {
-
+        categories
     }
 }
 
