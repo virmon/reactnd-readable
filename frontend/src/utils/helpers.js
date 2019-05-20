@@ -19,12 +19,19 @@ export function formatPost (post, id) {
     }
 }
 
-export function formatComment (comment) {
-    return {
-        id: generateUID(),
-        timestamp: Date.now(),
-        body: comment.body,
-        author: comment.author,
-        parentId: comment.parentId
+export function formatComment (comment, id) {
+    if (!id) {
+        return {
+            id: generateUID(),
+            timestamp: Date.now(),
+            body: comment.body,
+            author: comment.author,
+            parentId: comment.parentId
+        }
+    } else {
+        return {
+            timestamp: Date.now(),
+            body: comment.body
+        }
     }
 }

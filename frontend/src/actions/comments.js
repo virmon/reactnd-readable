@@ -19,10 +19,10 @@ export function addComment (comment) {
     }
 }
 
-export function editComment (id) {
+export function editComment (comment) {
     return {
         type: EDIT_COMMENT,
-        id
+        comment
     }
 }
 

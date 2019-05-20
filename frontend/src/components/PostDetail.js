@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import CommentList from './CommentList'
 import PostButton from './PostButton'
+import ActionButtons from './ActionButtons'
 import { deletePost } from '../actions/posts'
 import { receiveComments } from '../actions/comments'
-import { _deletePost } from '../utils/api'
+import { _delete } from '../utils/api'
 import { formatDate } from '../utils/helpers'
 import { connect } from 'react-redux'
 
@@ -42,7 +43,7 @@ class PostDetail extends Component {
     handleDelete = (id) => {
         const url = `${api}/posts/${id}`
         
-        _deletePost(url, id)
+        _delete(url, id)
             .then(() => this.props.deletePost(id))
 
         this.setState({ toHome: true })
@@ -64,9 +65,8 @@ class PostDetail extends Component {
                     <div className='post-content'>
                         <p>{body}</p>
                         <p>{category}</p>
-                        <p style={{color:'blue'}} onClick={() => this.handleEdit(id)}>EDIT</p>
-                        <p style={{color:'red'}} onClick={() => this.handleDelete(id)}>DELETE</p>
                         <p>{voteScore} score  {commentCount} comments</p>
+                        <ActionButtons id={id} title={title} body={body} author={author} category={category} />
                     </div>
                     <PostButton voteScore={voteScore} commentCount={commentCount} id={id} />
                     <div className='comment-section'>

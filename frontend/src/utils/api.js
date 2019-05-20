@@ -57,7 +57,7 @@ export function _editPost (url, data) {
         .then((res) => res.json())
 }
 
-export function _deletePost (url, id) {
+export function _delete (url, id) {
     return fetch(url, {
         method: 'DELETE',
         headers: { 
@@ -96,6 +96,18 @@ export function _voteComment (url, vote) {
 export function _addComment (url, comment) {
     return fetch(url, {
         method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want'
+        },
+        body: JSON.stringify(comment)
+    })
+    .then((res) => res.json())
+}
+
+export function _editComment (url, comment) {
+    return fetch(url, {
+        method: 'PUT',
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': 'whatever-you-want'

@@ -7,9 +7,9 @@ export function comments (state = [], action) {
         case ADD_COMMENT :
             return state.concat(action.comment)
         case EDIT_COMMENT :
-            return state.filter((comment) => comment.id === action.id)
+            return state.filter((comment) => comment.id !== action.comment.id).concat(action.comment)
         case DELETE_COMMENT :
-            return state.filter((comment) => comment.id === action.id)
+            return state.filter((comment) => comment.id !== action.id)
         case UP_VOTE_COMMENT :
             return state.map((comment) => {
                 if (comment.id === action.id) {
