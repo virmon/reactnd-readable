@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
-import PostButton from './PostButton';
+import PostButton from './PostButton'
+import ActionButtons from './ActionButtons'
 
 const PostItem = ({ id, title, body, author, category, timestamp, voteScore, commentCount }) => {
     return(
@@ -17,6 +18,9 @@ const PostItem = ({ id, title, body, author, category, timestamp, voteScore, com
                     <p className='post-counter'>{voteScore} score  {commentCount} comments</p>
                 </div>
             </Link>
+            <div className='post-content'>
+                <ActionButtons id={id} title={title} body={body} author={author} category={category} home={true} />
+            </div>
             <PostButton voteScore={voteScore} commentCount={commentCount} id={id} />
         </div>
     )

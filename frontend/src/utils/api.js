@@ -28,6 +28,16 @@ export function _getPosts (url) {
     .then((res) => res.json())
 }
 
+export function _getComments (url) {
+    return fetch(url, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'whatever-you-want' 
+        }
+    })
+    .then( (res) => res.json())
+}
+
 export function _savePost (url, data) {
     return fetch(url, {
         method: 'POST',
@@ -57,14 +67,13 @@ export function _editPost (url, data) {
         .then((res) => res.json())
 }
 
-export function _delete (url, id) {
+export function _delete (url) {
     return fetch(url, {
         method: 'DELETE',
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': 'whatever-you-want'
-        },
-        body: id
+        }
     })
     .then((res) => res.json())
 }

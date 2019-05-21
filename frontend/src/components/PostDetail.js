@@ -5,7 +5,7 @@ import PostButton from './PostButton'
 import ActionButtons from './ActionButtons'
 import { deletePost } from '../actions/posts'
 import { receiveComments } from '../actions/comments'
-import { _delete } from '../utils/api'
+import { _delete, _getComments } from '../utils/api'
 import { formatDate } from '../utils/helpers'
 import { connect } from 'react-redux'
 
@@ -22,11 +22,10 @@ class PostDetail extends Component {
         const id = this.props.match.params.id
         const url = `${api}/posts/${id}/comments`
         console.log('fetching from url', url)
-        fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
-        .then( (res) => { return(res.json()) })
-        .then((data) => {
-            this.props.receiveComments(data)
-        });
+        _getComments(url)
+            .then((data) => {
+                this.props.receiveComments(data)
+            })
     }
     handleChange = (e) => {
         this.setState({

@@ -23,19 +23,24 @@ class ActionButtons extends Component {
     handleDelete = (id) => {
         if (!this.props.commentId) {
             const url = `${api}/posts/${id}`
-            _delete(url, id)
-                .then(() => this.props.deletePost(id))
+            _delete(url)
                 .then((data) => {
+                    console.log(data)
                     if (data.commentCount !== 0) {
-                        console.log('has comments')
+                        console.log('has comments', data.commentCount)
                         const commentUrl = `${api}/comments/`
-                        this.props.comments.map((comment) =>
-                            _delete(commentUrl+comment.id, comment.id)
+                        console.log(this.props.comments)
+                        this.props.comments.filter((c) => c.parentId === id)
+                            .map((comment) =>
+                            _delete(commentUrl+comment.id)
                                 .then(() => this.props.deleteComment(comment.id))
                         )
                     }
                 })
-            this.setState({ toHome: true })
+                .then(() => this.props.deletePost(id))
+            if (!this.props.home) {
+                this.setState({ toHome: true })
+            }
             console.log('DELETING', id)
         } else {
             const url = `${api}/comments/${this.props.commentId}`

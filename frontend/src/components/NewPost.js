@@ -25,7 +25,13 @@ class NewPost extends Component {
                 category: data.category
             })
         } else {
-            return
+            this.setState({
+                id: '',
+                title: '',
+                author: '',
+                content: '',
+                category: ''
+            })
         }
     }
     handleChange = (e) => {
@@ -45,7 +51,7 @@ class NewPost extends Component {
             author,
             category
         }
-        
+
         if (data === undefined) {
             const url = `${api}/posts`
             
