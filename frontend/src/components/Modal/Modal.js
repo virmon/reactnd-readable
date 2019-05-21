@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { formatComment } from '../../utils/helpers'
+import { formatComment, validateComment } from '../../utils/helpers'
 import { _addComment, _editComment } from '../../utils/api'
 import { addComment, editComment } from '../../actions/comments'
 import { increment } from '../../actions/posts'
@@ -64,8 +64,10 @@ class Modal extends Component {
         }
     }
     render () {
-        const { isOpen } = this.state
+        const { isOpen, author, content } = this.state
         const { commentId } = this.props
+        const errors = validateComment(author, content)
+        const isEnabled = !Object.keys(errors).some(x => errors[x])
         return (
             <Fragment>
                 <span id="myBtn" onClick={this.handleOpenModal}>
@@ -77,7 +79,7 @@ class Modal extends Component {
                         <form onSubmit={this.comment} className='new-comment'>
                             <input type='text' name='author' value={this.state.author} onChange={this.handleChange} placeholder='author' disabled={!commentId ? false : true}/>
                             <input type='text' name='content' value={this.state.content} onChange={this.handleChange} placeholder='comment' />
-                            <input type='submit' value='Comment' className='btn'/>
+                            <input type='submit' value='Comment' className='btn' disabled={!isEnabled}/>
                         </form>
                     </div>
                 </div>

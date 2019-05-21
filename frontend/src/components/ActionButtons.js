@@ -56,7 +56,7 @@ class ActionButtons extends Component {
             <div>
                 {
                     !this.props.commentId 
-                        ? <span style={{color:'blue'}} onClick={() => this.handleEdit(id)}>EDIT</span>
+                        ? <span style={{color:'black'}} onClick={() => this.handleEdit(id)}>EDIT</span>
                         : <Modal commentId={this.props.commentId}>EDIT</Modal>
                 }
                 <span> </span>

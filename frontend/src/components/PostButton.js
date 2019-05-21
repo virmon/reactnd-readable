@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import { Popover, Button } from 'antd'
 import Modal from './Modal/Modal'
 import { TiMessage, TiThumbsUp, TiThumbsDown } from 'react-icons/ti'
-import { FaEllipsisH } from 'react-icons/fa'
+// import { FaEllipsisH } from 'react-icons/fa'
 import { upVote, downVote } from '../actions/posts'
 import { upVoteComment, downVoteComment } from '../actions/comments'
 import { _votePost, _voteComment } from '../utils/api'
@@ -50,7 +50,6 @@ class PostButton extends Component {
                 {
                     <ul className='comment-button'>
                         {id ? <li><Modal parentId={id}><TiMessage className='post-icon'/></Modal></li> : null}
-                        <li><FaEllipsisH className='post-icon'/></li>
                     </ul>
                 }
             </div>

@@ -35,3 +35,19 @@ export function formatComment (comment, id) {
         }
     }
 }
+
+export function validatePost(title, body, author, category) {
+    return {
+        title: title ? title.length === 0 : true,
+        body: body ? body.length === 0 : true,
+        author: author ? author.length === 0: true,
+        category: category ? category.length === 0 : true
+    }
+}
+
+export function validateComment(author, body) {
+    return {
+        author: author ? author.length === 0 : true,
+        body: body ? body.length === 0 : true
+    }
+}

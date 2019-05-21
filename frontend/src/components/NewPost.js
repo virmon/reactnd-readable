@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom' 
 import { _savePost, _editPost } from '../utils/api'
-import { formatPost } from '../utils/helpers'
+import { formatPost, validatePost } from '../utils/helpers'
 import { addPost, editPost } from '../actions/posts'
 import { connect } from 'react-redux' 
 
@@ -66,6 +66,8 @@ class NewPost extends Component {
     render () {
         const { categories } = this.props
         const { title, author, content, category, toHome } = this.state
+        const errors = validatePost(title, content, author, category)
+        const isEnabled = !Object.keys(errors).some(x => errors[x])
         if (toHome) {
             return <Redirect to={'/'} />
         }
@@ -84,7 +86,7 @@ class NewPost extends Component {
                             )
                         }
                     </select>
-                    <input type="submit" value="Save" className='btn'/>
+                    <input type="submit" value="Save" className='btn' disabled={!isEnabled}/>
                 </form>
             </div>
         )
