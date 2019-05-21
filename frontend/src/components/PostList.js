@@ -24,7 +24,7 @@ class PostList extends Component {
         const { data } = this.props
         return (
             <div className='post-list'>
-                <select value={this.state.sortBy} onChange={this.handleChange}>
+                <select value={this.state.sortBy} onChange={this.handleChange} className='sortBtn'>
                     <option value='date'>SORT BY DATE</option>
                     <option value='score'>SORT BY SCORE</option>
                 </select>

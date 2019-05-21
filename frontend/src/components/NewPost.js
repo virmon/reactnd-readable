@@ -76,7 +76,7 @@ class NewPost extends Component {
                     <input type='text' name='title' value={title} onChange={this.handleChange} placeholder='title' />
                     <input type='text' name='author' value={author} onChange={this.handleChange} placeholder='author' />
                     <input type='text' name='content' value={content} onChange={this.handleChange} placeholder='content' />
-                    <select name='category' value={category} onChange={this.handleChange} >
+                    <select name='category' value={category} onChange={this.handleChange} className='selectCategory'>
                         <option value=''>Select category</option>
                         {
                             categories.map((cat) =>

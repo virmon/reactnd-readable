@@ -60,12 +60,12 @@ class PostDetail extends Component {
                 <div className='card post-item'>
                     <div className='post-header'>
                         <h3>{title}</h3>
-                        <span>{author} {formatDate(timestamp)}</span>
+                        <span className='post-timestamp'>{author} {formatDate(timestamp)}</span>
                     </div>
                     <div className='post-content'>
-                        <p>{body}</p>
-                        <p>{category}</p>
-                        <p>{voteScore} score  {commentCount} comments</p>
+                        <p className='post-body'>{body}</p>
+                        <p className='post-category'><i>{category}</i></p>
+                        <p className='post-counter'>{voteScore} score  {commentCount} comments</p>
                         <ActionButtons id={id} title={title} body={body} author={author} category={category} />
                     </div>
                     <PostButton voteScore={voteScore} commentCount={commentCount} id={id} />
