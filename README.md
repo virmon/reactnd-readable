@@ -5,7 +5,7 @@ reactnd-readable is a content and comment web app. Users are able to post conten
 ## Getting Started
 
 * Download or clone the repository
-    - `git clone https://github.com/virmon/reactnd-would-you-rather.git`
+    - `git clone https://github.com/virmon/reactnd-readable.git`
 * Install and start the API server
     - `cd api-server`
     - `npm install`
