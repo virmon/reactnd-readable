@@ -1,13 +1,11 @@
-# Readable API Server
+# reactnd-readable
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+reactnd-readable is a content and comment web app. Users are able to post content, comment on their post and other's posts and vote on posts and comments. Users may also edit and delete posts and comments. Furthermore, users may sort list of contents by date and by score.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## Getting Started
 
-## Start Developing
-
-To get started developing right away:
-
+* Download or clone the repository
+    - `git clone https://github.com/virmon/reactnd-would-you-rather.git`
 * Install and start the API server
     - `cd api-server`
     - `npm install`
@@ -61,3 +59,6 @@ To run outside of the Workspace, please do not include the credentials. For exam
   ```
 
 You can see this in action in `frontend/src/App.js` in `componentDidMount`.
+
+## Create React App
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
