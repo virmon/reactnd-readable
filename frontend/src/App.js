@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PostList from './components/PostList'
 import PostDetail from './components/PostDetail'
 import NewPost from './components/NewPost'
+import NoMatch from './components/NoMatch'
 import Nav from './components/Nav'
 import { receivePosts } from './actions/posts'
 import { _getPosts, _getCategoryById } from './utils/api'
@@ -80,6 +81,7 @@ class App extends Component {
             <Route path='/:category' render={() => 
               <PostList data={posts} />
             }/>
+            <Route compoent={NoMatch} />
           </Switch>
         </div>
       </Router>

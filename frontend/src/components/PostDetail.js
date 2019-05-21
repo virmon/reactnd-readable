@@ -55,7 +55,11 @@ class PostDetail extends Component {
         if (this.state.toUpdate) {
             return <Redirect to={{pathname:'/new', state:{title, body, author, id, category }}} />
         }
-        return (
+        if (author === '' && body === '') {
+            return <div className='post-item'><p>404 NOT FOUND.</p><p>{id} does not exist.</p></div>
+        } else {
+            console.log(this.state.author)
+            return (
                 <div className='card post-item'>
                     <div className='post-header'>
                         <h3>{title}</h3>
@@ -72,7 +76,8 @@ class PostDetail extends Component {
                         <CommentList comments={comments} />
                     </div>
                 </div>
-        )
+            )
+        }
     }
 }
 
