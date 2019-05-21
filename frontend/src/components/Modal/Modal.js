@@ -76,6 +76,7 @@ class Modal extends Component {
                 <div id="myModal" className='modal' style={{display:isOpen ? 'block' : 'none'}}>
                     <div className="modal-content">
                         <span className="close" onClick={this.handleOpenModal}>&times;</span>
+                        <h2>Comment</h2>
                         <form onSubmit={this.comment} className='new-comment'>
                             <input type='text' name='author' value={this.state.author} onChange={this.handleChange} placeholder='author' disabled={!commentId ? false : true}/>
                             <input type='text' name='content' value={this.state.content} onChange={this.handleChange} placeholder='comment' />
